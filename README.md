@@ -4,6 +4,10 @@ Retrouvez dans ce repertoire toutes mes prises de notes (en français) de mes re
 
 ---
 
+## Solidity v0.8.0
+
+---
+
 ### Sommaire (en construction)
 
 - Types
