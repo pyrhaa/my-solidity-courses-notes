@@ -13,4 +13,4 @@ tandis que `address` ne peut pas en recevoir.
 
 #### Globales variables
 
-- `msg.sender`:
+- `msg.sender`: est une fonction intégrée([global variables](https://docs.soliditylang.org/en/latest/units-and-global-variables.html#address-related)) à Solidity qui indique l'adresse Ethereum en cours de connexion avec le contrat. Son type est `address payable`.
