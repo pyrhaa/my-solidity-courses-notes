@@ -27,7 +27,7 @@ Les conversions implicites de `address payable` en `address` sont autorisées, t
 
 #### Address literals
 
-**Address literals** ont la représentation hexadécimale d'une adresse Ethereum contenant 40 caractères (20 bytes) et préfixée par 0x.
+Address literals sont la représentation hexadécimale d'une adresse Ethereum contenant 40 caractères (20 bytes) et préfixée par 0x.
 
 Les littéraux hexadécimaux doivent réussir le [**address checksum test,**](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md) sinon ce test produira une erreur.
 
