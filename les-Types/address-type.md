@@ -1,4 +1,6 @@
-## Address
+## Address types
+
+#### Address
 
 The address type comes in two flavours, which are largely identical:
 
@@ -8,3 +10,7 @@ The address type comes in two flavours, which are largely identical:
 
 L'idée derrière cette distinction est que `address payable` est une addresse vers laquelle on peut envoyer de l'Ether,
 tandis que `address` ne peut pas en recevoir.
+
+#### Globales variables
+
+- `msg.sender`:

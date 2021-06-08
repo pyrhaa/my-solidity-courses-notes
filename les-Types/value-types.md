@@ -1,6 +1,6 @@
 ## Booleans
 
-`bool`: ses valeurs sont toujours `true` et/ou `false`.
+`bool`: ses valeurs sont `true` ou `false`.
 
 Opérateurs logiques:
 
