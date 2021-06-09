@@ -11,7 +11,13 @@ Retrouvez dans ce repertoire toutes mes prises de notes (en français) de mes re
 ### Sommaire (en construction)
 
 - Types
+
   - address
   - fonctions
   - modifiers
   - value
+  - references
+
+- Layout
+  - layout contrat
+  - bonnes pratiques
