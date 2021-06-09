@@ -176,3 +176,121 @@ contract AssignmentOperators {
     }
 }
 ```
+
+---
+
+#### Bitwise Operators
+
+Ils sont usités pour effectuer des bit-level operations comme `AND`, `OR`, `XOR`, `NOT` etc.
+
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.7.0 <0.8.0;
+
+contract BitwiseOperators {
+   /**
+    * @dev bitwise AND(&), performs boolean AND operation on each bit
+    *
+    * bytes1 a = 0x15; // [00010101]
+    * bytes1 b = 0xf6; // [11110110]
+    *
+    * i.e. (00010101) & (11110110) = (00010100)
+    */
+    function and(bytes1 b1, bytes1 b2) public pure returns(bytes1) {
+        return b1 & b2;
+    }
+
+   /**
+    * @dev bitwise OR(|), performs boolean OR operation on each bit
+    *
+    * bytes1 a = 0x15; // [00010101]
+    * bytes1 b = 0xf6; // [11110110]
+    *
+    * i.e. (00010101) | (11110110) = (11110111)
+    */
+    function or(bytes1 b1, bytes1 b2) public pure returns(bytes1) {
+        return b1 | b2;
+    }
+
+   /**
+    * @dev bitwise XOR(^), performs boolean XOR operation on each bit
+    *
+    * XOR Table
+    * 1 ^ 1 = 0
+    * 0 ^ 0 = 0
+    * 1 ^ 0 = 1
+    * 0 ^ 1 = 1
+    *
+    * bytes1 a = 0x15; // [00010101]
+    * bytes1 b = 0xf6; // [11110110]
+    *
+    * i.e. (00010101) ^ (11110110) = (11100011)
+    */
+    function xor(bytes1 b1, bytes1 b2) public pure returns(bytes1) {
+        return b1 ^ b2;
+    }
+
+   /**
+    * @dev bitwise NOT(~), performs boolean NOT operation on each bit
+    *
+    * bytes1 a = 0x15; // [00010101]
+    *
+    * i.e. ~00010101 = 11101010
+    */
+    function not(bytes1 b1) public pure returns(bytes1) {
+        return ~b1;
+    }
+
+   /**
+    * @dev bitwise left SHIFT(<<), shifts bits to the left according to given value
+    *
+    * bytes1 a = 0x15; // [00010101]
+    *
+    * i.e. 00010101 << 2 = 01010100
+    */
+    function leftShift(bytes1 a, uint n) public pure returns (bytes1) {
+        return a << n;
+    }
+
+  /**
+    * @dev bitwise right SHIFT(>>), shifts bits to the right according to given value
+    *
+    * bytes1 a = 0x15; // [00010101]
+    *
+    * i.e. 00010101 >> 2 = 00000101
+    */
+    function rightShift(bytes1 a, uint n) public pure returns (bytes1) {
+        return a >> n;
+    }
+}
+```
+
+---
+
+#### Conditional Operators
+
+L'opérateur conditionnel (ternaire) est un opérateur qui prend trois opérandes : une condition suivie d'un point d'interrogation (`?`), puis une expression à exécuter si la condition est vraie suivie de deux points (`:`), et enfin l'expression à exécuter si la condition est fausse. Cet opérateur est fréquemment utilisé comme raccourci au `if` statement.
+
+```
+/ SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.7.0 <0.8.0;
+
+contract ConditionalOperators {
+   /**
+    * @dev if condition true ? then x: else y
+    *
+    */
+    function getMax(uint x, uint y) public pure returns(uint) {
+        return x >= y ? x: y;
+    }
+
+    // same functionality with the above
+    function _getMax(uint x, uint y) internal pure returns(uint) {
+        if (x >= y) {
+            return x;
+        }
+
+        return y;
+    }
+}
+```
