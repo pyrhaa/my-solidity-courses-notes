@@ -1,4 +1,4 @@
-## Reference types
+## Reference types data location
 
 Tout reference type a une annotation supplémentaire (la data location) sur l'endroit où elles sont stockées. Il y a trois options possibles : memory, storage et calldata.
 
