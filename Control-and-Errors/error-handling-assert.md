@@ -1,0 +1,3 @@
+#### Panic via `assert`
+
+`assert`
