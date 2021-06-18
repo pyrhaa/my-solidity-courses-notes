@@ -154,3 +154,130 @@ contract Modifiers {
 `immutable` et `constant` sont des keywords qui sont usités sur des state variables pour restreindre les modifications à leur state. La différence est que `constant` variables ne peuvent jamais être modifiées après la compilation, tandis qu'`immutable` variables peut être défini dans le constructor. Il est également possible de déclarer des variables constantes au niveau du fichier.
 
 > > Notes: Le compiler ne réserve pas un **storage slot** pour ces variables, et chaque occurrence est remplacée par la valeur respective.
+
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.7.0 <0.8.0;
+
+// file level constant variable
+uint constant X = 32**22 + 8;
+
+contract ConstantAndImmutables {
+    string constant TEXT = "abc";
+    bytes32 constant MY_HASH = keccak256("abc");
+    uint immutable decimals;
+    uint immutable maxBalance;
+    address immutable owner = msg.sender;
+
+    constructor(uint _decimals, address _reference) {
+        decimals = _decimals;
+        // Assignments to immutables can even access state variables
+        maxBalance = _reference.balance;
+    }
+
+    function isBalanceTooHigh(address _other) public view returns (bool) {
+        return _other.balance > maxBalance;
+    }
+}
+```
+
+---
+
+##### Function Parameters and Return Variables
+
+Les fonctions peuvent prendre des paramètres typés et se comparer à d'autres langages, les fonctions dans Solidity renvoient également un nombre arbitraire de valeurs en output.
+
+###### function parameter
+
+Les paramètres sont déclarés de la même manière que les variables.
+
+###### return variables
+
+<em>Retrun variables</em> sont déclarés avec la même syntaxe que la déclaration des paramètres après le `returns` keyword et ils peuvent être utilisés comme n'importe quelle autre variable locale. Les noms des variables de retour peuvent être omis.
+
+###### Pure, View Functions
+
+`view`: Les fonctions peuvent être déclarées view auquel cas elles ne modifient pas l'état(state).
+
+Les déclarations suivantes sont considérées comme modifiant l'état :
+
+- Writing to state variables.
+- Emitting events.
+- Creating other contracts.
+- Using `selfdestruct`.
+- Sending Ether via calls.
+- Calling any function not marked `view` or `pure`.
+- Using low-level calls.
+- Using inline assembly that contains certain opcodes.
+
+> > Notes: Getter methods sont automatiquement marquées `view`.
+
+`pure`: Les fonctions peuvent être déclarées `pure` lorsqu'elles ne lisent pas ou ne modifient pas l'état.
+
+Les éléments suivants sont considérés comme une lecture de l'état :
+
+- Reading from state variables.
+- Accessing `address(this).balance` or `<address>.balance`.
+- Accessing any of the members of `block`, `tx`, `msg` (with the exception of `msg.sig` and `msg.data`).
+- Calling any function not marked `pure`.
+- Using inline assembly that contains certain opcodes.
+
+```
+// SPDX-License-Identifier: UNLICENSED
+pragma solidity >=0.7.0 <0.8.0;
+
+// function parameters, return variables and pure-view functions
+contract Test {
+    // state variables -- storage
+    uint private index = 1;
+    mapping(uint => uint) internal ids;
+
+    /**
+    * one parameter and one return type provided
+    *
+    * name of return variable is omitted
+    *
+    * function neither modify the state nor read from state,
+    * so marked as pure
+    */
+    function toAddress(bytes32 _key) external pure returns (address) {
+        return address(uint160(uint256(_key)));
+    }
+
+    /**
+    * multiple parameters and multiple return types provided
+    *
+    * names of return variables are omitted
+    *
+    * function neither modify the state nor read from state,
+    * so marked as pure
+    */
+    function get(uint _num1, uint _num2) external pure returns (uint, bytes32) {
+        return (_num1++, bytes32(_num2));
+    }
+
+    /**
+    * no function parameters
+    *
+    * return variables _id used as a local variable
+    *
+    * function is reading timestamp and difficulty
+    * from blockchain-state, so it is marked as view
+    */
+    function idGenerator() public view returns (uint _id) {
+     _id = uint(keccak256(abi.encode(block.timestamp, block.difficulty)));
+
+     return _id % 100;
+    }
+
+    /**
+    * function changing state
+    *
+    * cannot be marked as pure or view
+    * since it is modifying 'ids' mapping
+    */
+    function _idGenerator() internal {
+        ids[index++] = idGenerator();
+    }
+}
+```
