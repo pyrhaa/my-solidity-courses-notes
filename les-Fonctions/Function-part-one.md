@@ -95,7 +95,7 @@ contract B is A {
 
 ##### Function Modifiers
 
-En utilisant les modifiers, nous pouvons vérifier une condition avant d'exécuter la fonction. Ce sont des propriétés héritables des contrats et peuvent être remplacées par des contrats dérivés, mais seulement s'ils sont marqués `virtual`.
+En utilisant les modifiers, nous pouvons vérifier une condition avant d'exécuter la fonction. Ce sont des propriétés héritables des contrats, et peuvent être remplacées par des contrats dérivés, mais seulement s'ils sont marqués `virtual`.
 
 > > Notes: Nous pouvons appliquer plusieurs modifiiers aux fonctions en les plaçant dans une liste séparée par des espaces et ils sont évalués dans l'ordre présenté.
 
